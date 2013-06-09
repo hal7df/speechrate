@@ -6,7 +6,7 @@ checked to install this app.
 Go to the Google Play store, and download & install the app "Ministro II" (if you haven't already). This app is 
 libraries only, so it will not show up in your apps directory.
 
-Once you've done that, download the file "SpeechRate-stable-<version>.apk". Once it's done, open the "Downloads" app,
+Once you've done that, navigate to the "release" folder and download the file "SpeechRate-stable-<version>.apk". Once it's done, open the "Downloads" app,
 and open with App Installer. It will only take a moment to install.
 
 If you have not used Ministro on your phone before, it will ask to download extra libraries. Let it do this -- it may 

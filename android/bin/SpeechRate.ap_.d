@@ -34,7 +34,9 @@
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/Menu.qml \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/Button.qml \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/MenuItem.qml \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/IconWidget.qml \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/main.qml \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/images \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/images/menu.png \
