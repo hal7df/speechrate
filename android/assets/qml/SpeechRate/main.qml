@@ -1,4 +1,3 @@
-// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
 Rectangle {
     id: root
@@ -55,7 +54,6 @@ Rectangle {
             editAccept.visible = false;
         }
     }
-
 
     Button {
         id: plusOneButton
@@ -239,77 +237,43 @@ Rectangle {
             id: secSelect
             text: editItem.text+"/sec"
             width: minSelect.width
-            states: State {
-                name: "secSelected"; when: secUnitButton.pressed === true
-                PropertyChanges { target: secSelect; color: "#2b2b2b" }
-            }
-
-            MouseArea {
-                id:secUnitButton
-                anchors.fill: parent
-                onClicked: {
-                    calcOutput.timeUnit = "sec";
-                    unitSelect.close();
-                }
+            onClicked: {
+                calcOutput.timeUnit = "sec";
+                unitSelect.close();
             }
         }
+
         MenuItem {
             id: minSelect
             text: editItem.text+"/min"
-            states: State {
-                name: "minSelected"; when: minUnitButton.pressed === true
-                PropertyChanges { target: minSelect; color: "#2b2b2b" }
-            }
-
-            MouseArea {
-                id:minUnitButton
-                anchors.fill: parent
-                onClicked: {
-                    calcOutput.timeUnit = "min";
-                    unitSelect.close();
-                }
+            onClicked: {
+                calcOutput.timeUnit = "min";
+                unitSelect.close();
             }
         }
+
         MenuItem {
             id: hrSelect
             text: editItem.text+"/hr"
             width: minSelect.width
-            states: State {
-                name: "hrSelected"; when: hrUnitButton.pressed === true
-                PropertyChanges { target: hrSelect; color: "#2b2b2b" }
-            }
-
-            MouseArea {
-                id:hrUnitButton
-                anchors.fill: parent
-                onClicked: {
-                    calcOutput.timeUnit = "hr";
-                    unitSelect.close();
-                }
+            onClicked: {
+                calcOutput.timeUnit = "hr";
+                unitSelect.close();
             }
         }
+
         MenuItem {
             id: closeSelect
             text: "Close"
             width: minSelect.width
-            states: State {
-                name: "closeSelected"; when: exitButton.pressed === true
-                PropertyChanges { target: closeSelect; color: "#2b2b2b" }
-            }
-
-            MouseArea {
-                id:exitButton
-                anchors.fill: parent
-                onClicked: unitSelect.close()
-            }
+            onClicked: unitSelect.close()
         }
     }
 
     IconWidget {
         id: menuButton
-        anchors { top: parent.top; right: parent.right }
-        width: 75
-        height: 75
+        anchors { top: parent.top; right: parent.right; bottom: likeCount.bottom }
+        width: height
         z: 1
         source: "images/menu.png"
         onClicked: unitSelect.toggle()

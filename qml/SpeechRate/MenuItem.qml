@@ -6,7 +6,12 @@ Rectangle {
     height: 50
     border { color: "#2b2b2b"; width: 1 }
     color: "#141414"
+    states: State {
+        name: "selected"; when: menuButton.pressed
+        PropertyChanges { target: menuItem; color: "#0091ff"}
+    }
 
+    signal clicked
     property alias text: menuText.text
 
     Text {
@@ -15,5 +20,11 @@ Rectangle {
         text: "Unnamed Menu Entry"
         anchors.centerIn: parent
         font.pointSize: 24
+    }
+
+    MouseArea {
+        id: menuButton
+        anchors.fill: parent
+        Component.onCompleted: clicked.connect(menuItem.clicked);
     }
 }
