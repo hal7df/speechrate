@@ -59,7 +59,7 @@ Rectangle {
         id: plusOneButton
         anchors { right: parent.right; left: parent.left; top: likeCount.bottom; topMargin: 10; bottom: reset.top; bottomMargin: 10 }
         text: "+1"
-        font.pointSize: 24
+        font.pointSize: 36
         onClicked: likeCount.likeNum++
     }
 
