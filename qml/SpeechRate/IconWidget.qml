@@ -5,7 +5,7 @@ Rectangle {
     color: "#141414"
     width: height
     states: [ State {
-        name: "activated"; when: button.pressed && !toggle
+        name: "activated"; when: button.pressed && !toggle && !disabled
         PropertyChanges { target: iconWidget; color: "#0091ff" }
     },
         State {
@@ -18,6 +18,7 @@ Rectangle {
     property alias source: image.source
     property bool toggle: false
     property bool toggled: false
+    property bool disabled: false
     signal clicked
 
     Image {

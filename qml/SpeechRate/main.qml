@@ -8,15 +8,16 @@ Rectangle {
     function getFrequency(/*int*/ count, /*string*/ measuredEvent)
     {
         var totTime;
-        var frequency
+        var frequency;
+        var freq;
         if (unitSelect.timeUnit === "sec")
         {
             totTime = clockOutput.seconds+(clockOutput.minutes*60)+(clockOutput.hours*3600);
             if (totTime !== 0)
             {
-                frequency = (count/totTime)
+                frequency = (count/totTime);
                 frequency.toFixed(3);
-                return frequency+" "+measuredEvent+"/sec";
+                return freq+" "+measuredEvent+"/sec";
             }
             else
                 return "";
@@ -26,9 +27,9 @@ Rectangle {
             totTime = (clockOutput.seconds/60)+clockOutput.minutes+(clockOutput.hours*60);
             if (totTime !== 0)
             {
-                frequency = (count/totTime)
+                frequency = (count/totTime);
                 frequency.toFixed(3);
-                return frequency+" "+measuredEvent+"/min";
+                return freq+" "+measuredEvent+"/min";
             }
             else
                 return "";
@@ -38,7 +39,7 @@ Rectangle {
             totTime = (clockOutput.seconds/3600)+(clockOutput.minutes/60)+clockOutput.hours;
             if (totTime !== 0)
             {
-                frequency = (count/totTime)
+                frequency = (count/totTime);
                 frequency.toFixed(3);
                 return frequency+" "+measuredEvent+"/hr";
             }
@@ -74,6 +75,7 @@ Rectangle {
             id: addCounter
             anchors { top: parent.top; bottom: parent.bottom; right: parent.right }
             source: "images/add.png"
+            disabled: trackerRepeater.count === 4 ? true : false
             onClicked: {
                 if (counts < 4)
                     counts++;
@@ -90,6 +92,7 @@ Rectangle {
             id: subtractCounter
             anchors { top: parent.top; bottom: parent.bottom; right: addCounter.left }
             source: "images/delete.png"
+            disabled: trackerRepeater.count === 1 ? true : false
             onClicked: {
                 if (addCounter.counts > 1)
                     addCounter.counts--;
