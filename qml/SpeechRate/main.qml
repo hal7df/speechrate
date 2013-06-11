@@ -1,46 +1,72 @@
 import QtQuick 1.1
 Rectangle {
+
     id: root
     color: "#141414"
     height: 800
     width: 480
 
-    function getFrequency(/*int*/ count, /*string*/ measuredEvent)
+    function getFrequency()
     {
         var totTime;
         var frequency;
+        var freq_fixed;
+        var measuredEvent
+        var count;
+        var x;
+
+        /** SECONDS **/
         if (unitSelect.timeUnit === "sec")
         {
             totTime = clockOutput.seconds+(clockOutput.minutes*60)+(clockOutput.hours*3600);
             if (totTime !== 0)
             {
-                frequency = (count/totTime);
-                frequency.toFixed(3);
-                return frequency+" "+measuredEvent+"/sec";
+                for (x=0; x < trackerRepeater.count; x++)
+                {
+                    measuredEvent = trackerRepeater.itemAt(x).text
+                    count = trackerRepeater.itemAt(x).frequency;
+                    frequency = (count/totTime);
+                    freq_fixed=frequency.toFixed(3);
+                    trackerRepeater.itemAt(x).frequency=freq_fixed+" "+measuredEvent+"/sec";
+                }
             }
             else
                 return "";
         }
+
+        /** MINUTES **/
         else if (unitSelect.timeUnit === "min")
         {
             totTime = (clockOutput.seconds/60)+clockOutput.minutes+(clockOutput.hours*60);
             if (totTime !== 0)
             {
-                frequency = (count/totTime);
-                frequency.toFixed(3);
-                return frequency+" "+measuredEvent+"/min";
+                for (x=0; x < trackerRepeater.count; x++)
+                {
+                    measuredEvent = trackerRepeater.itemAt(x).text
+                    count = trackerRepeater.itemAt(x).frequency;
+                    frequency = (count/totTime);
+                    freq_fixed=frequency.toFixed(3);
+                    trackerRepeater.itemAt(x).frequency=freq_fixed+" "+measuredEvent+"/min";
+                }
             }
             else
                 return "";
         }
+
+        /** HOURS **/
         else if (unitSelect.timeUnit == "hr")
         {
             totTime = (clockOutput.seconds/3600)+(clockOutput.minutes/60)+clockOutput.hours;
             if (totTime !== 0)
             {
-                frequency = (count/totTime);
-                frequency.toFixed(3);
-                return frequency+" "+measuredEvent+"/hr";
+                for (x=0; x < trackerRepeater.count; x++)
+                {
+                    measuredEvent = trackerRepeater.itemAt(x).text
+                    count = trackerRepeater.itemAt(x).eventCount;
+                    frequency = (count/totTime);
+                    freq_fixed = frequency.toFixed(3);
+                    trackerRepeater.itemAt(x).frequency=freq_fixed+" "+measuredEvent+"/hr";
+                }
             }
             else
                 return "";
@@ -110,17 +136,22 @@ Rectangle {
                 width: (root.width/2)-5
                 height: (eventTracker.height/2)-5
 
+                property alias eventCount: counterDelegate.eventCount
+                property alias frequency: counterDelegate.frequency
+                property alias text: textDelegate.text
+
                 Button {
                     id: counterDelegate
                     anchors.fill: parent
                     visible: !editButton.toggled
-                    text: textDelegate.text+": "+eventCount+"\n"+root.getFrequency(eventCount,textDelegate.text)
-                    font.pointSize: 36
+                    text: textDelegate.text+": "+eventCount+"\n"+frequency
+                    font.pointSize: 24
                     onClicked: eventCount++
 
                     Component.onCompleted: resetCount.connect(reset.clicked)
 
                     property int eventCount: 0
+                    property string frequency: "0 "+textDelegate.text+"/"+unitSelect.timeUnit
                     signal resetCount
 
                     onResetCount: eventCount = 0
@@ -130,7 +161,7 @@ Rectangle {
                 TextInput {
                     id: textDelegate
                     visible: editButton.toggled
-                    text: "Event"
+                    text: "Events"
                     font.pointSize: 36
                     color: "#ffffff"
                     anchors.centerIn: counterDelegate
@@ -175,6 +206,7 @@ Rectangle {
 
             function resetAll()
             {
+                //Reset Clock
                 clock.restart();
                 clock.stop();
                 clockControl.source = "images/start.png";
@@ -182,6 +214,12 @@ Rectangle {
                 clockOutput.minutes = 0;
                 clockOutput.hours = 0;
                 clockOutput.text = "00:00:00";
+
+                //Reset Counters
+                for (var x=0; x<trackerRepeater.count; x++)
+                {
+                    trackerRepeater.itemAt(x).eventCount = 0;
+                }
             }
         }
 
@@ -259,7 +297,10 @@ Rectangle {
         id: clock
         repeat: true
         running: false
-        onTriggered: clockOutput.update()
+        onTriggered: {
+            parent.getFrequency();
+            clockOutput.update();
+        }
     }
 
     Menu {
@@ -268,7 +309,7 @@ Rectangle {
         z: 10
         anchors { bottom: toolbar.top; right: parent.right; rightMargin: 5; left: parent.horizontalCenter }
 
-        property string timeUnit
+        property string timeUnit: "min"
 
         MenuItem {
             id: secSelect
