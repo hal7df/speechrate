@@ -39,6 +39,9 @@
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/IconWidget.qml \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/main.qml \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/images \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/images/stop.png \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/images/clear.png \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/images/menu.png \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/images/start.png \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/assets/qml/SpeechRate/images/menu.jpeg \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/AndroidManifest.xml \

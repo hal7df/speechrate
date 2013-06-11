@@ -1,9 +1,9 @@
-// import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
 import QtQuick 1.1
 
 Rectangle {
     id: iconWidget
     color: "#141414"
+    width: height
     states: State {
         name: "activated"; when: button.pressed === true
         PropertyChanges { target: iconWidget; color: "#0091ff" }
