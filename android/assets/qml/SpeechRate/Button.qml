@@ -17,6 +17,7 @@ Rectangle {
         id: label
         color: "#ffffff"
         anchors.centerIn: parent
+        horizontalAlignment: Text.AlignHCenter
     }
 
     MouseArea {
