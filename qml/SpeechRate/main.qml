@@ -9,7 +9,6 @@ Rectangle {
     {
         var totTime;
         var frequency;
-        var freq;
         if (unitSelect.timeUnit === "sec")
         {
             totTime = clockOutput.seconds+(clockOutput.minutes*60)+(clockOutput.hours*3600);
@@ -17,7 +16,7 @@ Rectangle {
             {
                 frequency = (count/totTime);
                 frequency.toFixed(3);
-                return freq+" "+measuredEvent+"/sec";
+                return frequency+" "+measuredEvent+"/sec";
             }
             else
                 return "";
@@ -29,7 +28,7 @@ Rectangle {
             {
                 frequency = (count/totTime);
                 frequency.toFixed(3);
-                return freq+" "+measuredEvent+"/min";
+                return frequency+" "+measuredEvent+"/min";
             }
             else
                 return "";
@@ -80,10 +79,6 @@ Rectangle {
                 if (counts < 4)
                     counts++;
             }
-            states: State {
-                name: "inactive"; when: trackerRepeater.count === 4
-                PropertyChanges { target: addCounter; opacity: 0.25 }
-            }
 
             property int counts: 1
         }
@@ -96,10 +91,6 @@ Rectangle {
             onClicked: {
                 if (addCounter.counts > 1)
                     addCounter.counts--;
-            }
-            states: State {
-                name: "inactive"; when: addCounter.counts === 1
-                PropertyChanges { target: subtractCounter; opacity: 0.25 }
             }
         }
     }
@@ -147,14 +138,6 @@ Rectangle {
             }
         }
     }
-
-    /*Button {
-        id: plusOneButton
-        anchors { right: parent.right; left: parent.left; top: likeCount.bottom; topMargin: 10; bottom: calcOutput.top; bottomMargin: 10 }
-        text: "+1"
-        font.pointSize: 36
-        onClicked: likeCount.likeNum++
-    }*/
 
     Rectangle {
         id: toolbar

@@ -11,6 +11,10 @@ Rectangle {
         State {
             name: "toggleOn"; when: toggled
             PropertyChanges { target: iconWidget; color: "#0091ff"}
+        },
+        State {
+            name: "greyedOut"; when: disabled
+            PropertyChanges { target: iconWidget; opacity: 0.25 }
         }
 
     ]
