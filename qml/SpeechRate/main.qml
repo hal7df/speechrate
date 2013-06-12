@@ -233,6 +233,7 @@ Rectangle {
             anchors { top: parent.top; topMargin: 1; right: parent.right; bottom: parent.bottom }
             z: 1
             source: "images/menu.png"
+            toggle: true
             onClicked: unitSelect.toggle()
         }
 
@@ -321,6 +322,7 @@ Rectangle {
             width: parent.width
             onClicked: {
                 parent.timeUnit = "sec";
+                menuButton.toggled = false;
                 unitSelect.close();
             }
         }
@@ -331,6 +333,7 @@ Rectangle {
             width: parent.width
             onClicked: {
                 parent.timeUnit = "min";
+                menuButton.toggled = false;
                 unitSelect.close();
             }
         }
@@ -341,6 +344,7 @@ Rectangle {
             width: parent.width
             onClicked: {
                 parent.timeUnit = "hr";
+                menuButton.toggled = false;
                 unitSelect.close();
             }
         }
@@ -349,7 +353,10 @@ Rectangle {
             id: closeSelect
             text: "Close"
             width: parent.width
-            onClicked: parent.close()
+            onClicked: {
+                menuButton.toggled = false;
+                parent.close()
+            }
         }
     }
 }
