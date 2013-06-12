@@ -27,7 +27,7 @@ Rectangle {
                     count = trackerRepeater.itemAt(x).frequency;
                     frequency = (count/totTime);
                     freq_fixed=frequency.toFixed(3);
-                    trackerRepeater.itemAt(x).frequency=freq_fixed+" "+measuredEvent+"/sec";
+                    trackerRepeater.itemAt(x).frequency=freq_fixed+"\n"+measuredEvent+"/sec";
                 }
             }
             else
@@ -46,7 +46,7 @@ Rectangle {
                     count = trackerRepeater.itemAt(x).frequency;
                     frequency = (count/totTime);
                     freq_fixed=frequency.toFixed(3);
-                    trackerRepeater.itemAt(x).frequency=freq_fixed+" "+measuredEvent+"/min";
+                    trackerRepeater.itemAt(x).frequency=freq_fixed+"\n"+measuredEvent+"/min";
                 }
             }
             else
@@ -65,7 +65,7 @@ Rectangle {
                     count = trackerRepeater.itemAt(x).eventCount;
                     frequency = (count/totTime);
                     freq_fixed = frequency.toFixed(3);
-                    trackerRepeater.itemAt(x).frequency=freq_fixed+" "+measuredEvent+"/hr";
+                    trackerRepeater.itemAt(x).frequency=freq_fixed+"\n"+measuredEvent+"/hr";
                 }
             }
             else
@@ -155,7 +155,7 @@ Rectangle {
                     Component.onCompleted: resetCount.connect(reset.clicked)
 
                     property int eventCount: 0
-                    property string frequency: "0 "+textDelegate.text+"/"+unitSelect.timeUnit
+                    property string frequency: "0\n"+textDelegate.text+"/"+unitSelect.timeUnit
                     signal resetCount
 
                     onResetCount: eventCount = 0
