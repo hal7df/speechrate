@@ -14,7 +14,7 @@ Rectangle {
         },
         State {
             name: "greyedOut"; when: disabled
-            PropertyChanges { target: iconWidget; opacity: 0.25 }
+            PropertyChanges { target: image; opacity: 0.25 }
         }
 
     ]

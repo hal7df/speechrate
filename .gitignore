@@ -2,6 +2,9 @@
 *.apk
 *.ap_
 
+# built library files
+*.so
+
 # files for the dex VM
 *.dex
 
@@ -15,7 +18,7 @@ gen/
 # Local configuration file (sdk path, etc)
 local.properties
 
-#Qt Creator project files
+# Qt Creator project files
 *.pro.user
 *.pro
 

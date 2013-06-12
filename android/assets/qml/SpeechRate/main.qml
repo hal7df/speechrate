@@ -123,6 +123,10 @@ Rectangle {
 
     Grid {
         id: eventTracker
+        x: 0
+        y: 80
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
         columns: 2
         rows: 2
         spacing: 10
