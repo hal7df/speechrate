@@ -16,7 +16,7 @@ bin/
 gen/
 
 # Local configuration file (sdk path, etc)
-local.properties
+*.properties
 
 # Qt Creator project files
 *.pro.user
