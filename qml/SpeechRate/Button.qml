@@ -16,6 +16,7 @@ Rectangle {
     Text {
         id: label
         color: "#ffffff"
+        width: parent.width
         anchors.centerIn: parent
         horizontalAlignment: Text.AlignHCenter
     }

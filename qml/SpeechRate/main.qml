@@ -6,6 +6,7 @@ Rectangle {
     height: 800
     width: 480
 
+    /** EVENT FREQUENCY **/
     function getFrequency()
     {
         var totTime;
@@ -73,6 +74,7 @@ Rectangle {
         }
     }
 
+    /** TOP STATUS BAR **/
     Rectangle {
         id: statusBar
         height: 75
@@ -94,6 +96,15 @@ Rectangle {
             anchors { top: parent.top; bottom: parent.bottom; left: parent.left }
             source: "images/edit.png"
             toggle: true
+        }
+
+        IconWidget {
+            id: directionButton
+            anchors { top: parent.top; bottom: parent.bottom; left: editButton.right; leftMargin: 5 }
+            source: reverseCountDirection ? "images/down.png" : "images/up.png"
+            onClicked: reverseCountDirection ? reverseCountDirection = false : reverseCountDirection = true
+
+            property bool reverseCountDirection: false
         }
 
         IconWidget {
@@ -150,7 +161,7 @@ Rectangle {
                     visible: !editButton.toggled
                     text: textDelegate.text+": "+eventCount+"\n"+frequency
                     font.pointSize: 24
-                    onClicked: eventCount++
+                    onClicked: directionButton.reverseCountDirection ? eventCount-- : eventCount++
 
                     Component.onCompleted: resetCount.connect(reset.clicked)
 
