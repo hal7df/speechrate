@@ -6,73 +6,39 @@ Rectangle {
     height: 800
     width: 480
 
+    /** EVENT FREQUENCY **/
     function getFrequency()
     {
         var totTime;
         var frequency;
-        var freq_fixed;
-        var measuredEvent
         var count;
         var x;
 
         /** SECONDS **/
         if (unitSelect.timeUnit === "sec")
-        {
             totTime = clockOutput.seconds+(clockOutput.minutes*60)+(clockOutput.hours*3600);
-            if (totTime !== 0)
-            {
-                for (x=0; x < trackerRepeater.count; x++)
-                {
-                    measuredEvent = trackerRepeater.itemAt(x).text
-                    count = trackerRepeater.itemAt(x).frequency;
-                    frequency = (count/totTime);
-                    freq_fixed=frequency.toFixed(3);
-                    trackerRepeater.itemAt(x).frequency=freq_fixed+" "+measuredEvent+"/sec";
-                }
-            }
-            else
-                return "";
-        }
 
         /** MINUTES **/
         else if (unitSelect.timeUnit === "min")
-        {
             totTime = (clockOutput.seconds/60)+clockOutput.minutes+(clockOutput.hours*60);
-            if (totTime !== 0)
-            {
-                for (x=0; x < trackerRepeater.count; x++)
-                {
-                    measuredEvent = trackerRepeater.itemAt(x).text
-                    count = trackerRepeater.itemAt(x).frequency;
-                    frequency = (count/totTime);
-                    freq_fixed=frequency.toFixed(3);
-                    trackerRepeater.itemAt(x).frequency=freq_fixed+" "+measuredEvent+"/min";
-                }
-            }
-            else
-                return "";
-        }
 
         /** HOURS **/
-        else if (unitSelect.timeUnit == "hr")
-        {
+        else if (unitSelect.timeUnit === "hr")
             totTime = (clockOutput.seconds/3600)+(clockOutput.minutes/60)+clockOutput.hours;
-            if (totTime !== 0)
+
+        if (totTime !== 0)
+        {
+            for (x=0; x < trackerRepeater.count; x++)
             {
-                for (x=0; x < trackerRepeater.count; x++)
-                {
-                    measuredEvent = trackerRepeater.itemAt(x).text
-                    count = trackerRepeater.itemAt(x).eventCount;
-                    frequency = (count/totTime);
-                    freq_fixed = frequency.toFixed(3);
-                    trackerRepeater.itemAt(x).frequency=freq_fixed+" "+measuredEvent+"/hr";
-                }
+                count = trackerRepeater.itemAt(x).eventCount;
+                trackerRepeater.itemAt(x).frequency = (count/totTime);
             }
-            else
-                return "";
         }
+        else
+            trackerRepeater.itemAt(x).frequency = 0.0;
     }
 
+    /** TOP STATUS BAR **/
     Rectangle {
         id: statusBar
         height: 75
@@ -94,6 +60,15 @@ Rectangle {
             anchors { top: parent.top; bottom: parent.bottom; left: parent.left }
             source: "images/edit.png"
             toggle: true
+        }
+
+        IconWidget {
+            id: directionButton
+            anchors { top: parent.top; bottom: parent.bottom; left: editButton.right; leftMargin: 5 }
+            source: reverseCountDirection ? "images/down.png" : "images/up.png"
+            onClicked: reverseCountDirection ? reverseCountDirection = false : reverseCountDirection = true
+
+            property bool reverseCountDirection: false
         }
 
         IconWidget {
@@ -148,19 +123,20 @@ Rectangle {
                     id: counterDelegate
                     anchors.fill: parent
                     visible: !editButton.toggled
-                    text: textDelegate.text+": "+eventCount+"\n"+frequency
+                    text: textDelegate.text+": "+eventCount+"\n"+frequency.toFixed(3)+"\n"+textDelegate.text+"/"+unitSelect.timeUnit
                     font.pointSize: 24
-                    onClicked: eventCount++
+                    onClicked: directionButton.reverseCountDirection ? eventCount-- : eventCount++
 
                     Component.onCompleted: resetCount.connect(reset.clicked)
 
                     property int eventCount: 0
-                    property string frequency: "0 "+textDelegate.text+"/"+unitSelect.timeUnit
+                    property double frequency: 0.0
                     signal resetCount
 
-                    onResetCount: eventCount = 0
-
-
+                    onResetCount: {
+                        frequency = 0.0
+                        eventCount = 0
+                    }
                 }
                 TextInput {
                     id: textDelegate
@@ -223,6 +199,7 @@ Rectangle {
                 for (var x=0; x<trackerRepeater.count; x++)
                 {
                     trackerRepeater.itemAt(x).eventCount = 0;
+                    trackerRepeater.itemAt(x).frequency = 0.0;
                 }
             }
         }
@@ -233,6 +210,7 @@ Rectangle {
             anchors { top: parent.top; topMargin: 1; right: parent.right; bottom: parent.bottom }
             z: 1
             source: "images/menu.png"
+            toggle: true
             onClicked: unitSelect.toggle()
         }
 
@@ -302,8 +280,8 @@ Rectangle {
         repeat: true
         running: false
         onTriggered: {
-            parent.getFrequency();
             clockOutput.update();
+            parent.getFrequency();
         }
     }
 
@@ -321,6 +299,7 @@ Rectangle {
             width: parent.width
             onClicked: {
                 parent.timeUnit = "sec";
+                menuButton.toggled = false;
                 unitSelect.close();
             }
         }
@@ -331,6 +310,7 @@ Rectangle {
             width: parent.width
             onClicked: {
                 parent.timeUnit = "min";
+                menuButton.toggled = false;
                 unitSelect.close();
             }
         }
@@ -341,6 +321,7 @@ Rectangle {
             width: parent.width
             onClicked: {
                 parent.timeUnit = "hr";
+                menuButton.toggled = false;
                 unitSelect.close();
             }
         }
@@ -349,7 +330,10 @@ Rectangle {
             id: closeSelect
             text: "Close"
             width: parent.width
-            onClicked: parent.close()
+            onClicked: {
+                menuButton.toggled = false;
+                parent.close()
+            }
         }
     }
 }

@@ -11,67 +11,31 @@ Rectangle {
     {
         var totTime;
         var frequency;
-        var freq_fixed;
-        var measuredEvent
         var count;
         var x;
 
         /** SECONDS **/
         if (unitSelect.timeUnit === "sec")
-        {
             totTime = clockOutput.seconds+(clockOutput.minutes*60)+(clockOutput.hours*3600);
-            if (totTime !== 0)
-            {
-                for (x=0; x < trackerRepeater.count; x++)
-                {
-                    measuredEvent = trackerRepeater.itemAt(x).text
-                    count = trackerRepeater.itemAt(x).frequency;
-                    frequency = (count/totTime);
-                    freq_fixed=frequency.toFixed(3);
-                    trackerRepeater.itemAt(x).frequency=freq_fixed+"\n"+measuredEvent+"/sec";
-                }
-            }
-            else
-                return "";
-        }
 
         /** MINUTES **/
         else if (unitSelect.timeUnit === "min")
-        {
             totTime = (clockOutput.seconds/60)+clockOutput.minutes+(clockOutput.hours*60);
-            if (totTime !== 0)
-            {
-                for (x=0; x < trackerRepeater.count; x++)
-                {
-                    measuredEvent = trackerRepeater.itemAt(x).text
-                    count = trackerRepeater.itemAt(x).frequency;
-                    frequency = (count/totTime);
-                    freq_fixed=frequency.toFixed(3);
-                    trackerRepeater.itemAt(x).frequency=freq_fixed+"\n"+measuredEvent+"/min";
-                }
-            }
-            else
-                return "";
-        }
 
         /** HOURS **/
-        else if (unitSelect.timeUnit == "hr")
-        {
+        else if (unitSelect.timeUnit === "hr")
             totTime = (clockOutput.seconds/3600)+(clockOutput.minutes/60)+clockOutput.hours;
-            if (totTime !== 0)
+
+        if (totTime !== 0)
+        {
+            for (x=0; x < trackerRepeater.count; x++)
             {
-                for (x=0; x < trackerRepeater.count; x++)
-                {
-                    measuredEvent = trackerRepeater.itemAt(x).text
-                    count = trackerRepeater.itemAt(x).eventCount;
-                    frequency = (count/totTime);
-                    freq_fixed = frequency.toFixed(3);
-                    trackerRepeater.itemAt(x).frequency=freq_fixed+"\n"+measuredEvent+"/hr";
-                }
+                count = trackerRepeater.itemAt(x).eventCount;
+                trackerRepeater.itemAt(x).frequency = (count/totTime);
             }
-            else
-                return "";
         }
+        else
+            trackerRepeater.itemAt(x).frequency = 0.0;
     }
 
     /** TOP STATUS BAR **/
@@ -159,19 +123,20 @@ Rectangle {
                     id: counterDelegate
                     anchors.fill: parent
                     visible: !editButton.toggled
-                    text: textDelegate.text+": "+eventCount+"\n"+frequency
+                    text: textDelegate.text+": "+eventCount+"\n"+frequency.toFixed(3)+"\n"+textDelegate.text+"/"+unitSelect.timeUnit
                     font.pointSize: 24
                     onClicked: directionButton.reverseCountDirection ? eventCount-- : eventCount++
 
                     Component.onCompleted: resetCount.connect(reset.clicked)
 
                     property int eventCount: 0
-                    property string frequency: "0\n"+textDelegate.text+"/"+unitSelect.timeUnit
+                    property double frequency: 0.0
                     signal resetCount
 
-                    onResetCount: eventCount = 0
-
-
+                    onResetCount: {
+                        frequency = 0.0
+                        eventCount = 0
+                    }
                 }
                 TextInput {
                     id: textDelegate
@@ -234,6 +199,7 @@ Rectangle {
                 for (var x=0; x<trackerRepeater.count; x++)
                 {
                     trackerRepeater.itemAt(x).eventCount = 0;
+                    trackerRepeater.itemAt(x).frequency = 0.0;
                 }
             }
         }
@@ -314,8 +280,8 @@ Rectangle {
         repeat: true
         running: false
         onTriggered: {
-            parent.getFrequency();
             clockOutput.update();
+            parent.getFrequency();
         }
     }
 
