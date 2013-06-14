@@ -1,4 +1,11 @@
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes.dex : \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/monarq/experiments/SpeechRate/R$string.class \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/monarq/experiments/SpeechRate/R.class \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/monarq/experiments/SpeechRate/R$layout.class \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/monarq/experiments/SpeechRate/R$array.class \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/monarq/experiments/SpeechRate/R$attr.class \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/monarq/experiments/SpeechRate/R$drawable.class \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/monarq/experiments/SpeechRate/BuildConfig.class \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/kde/necessitas/SpeechRate/R$string.class \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/kde/necessitas/SpeechRate/R.class \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/kde/necessitas/SpeechRate/R$layout.class \

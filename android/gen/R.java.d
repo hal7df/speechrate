@@ -1,4 +1,4 @@
-/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/gen/org/kde/necessitas/SpeechRate/R.java \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/gen/org/monarq/experiments/SpeechRate/R.java \
  : /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/res/values-ru/strings.xml \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/res/values-ja/strings.xml \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/res/values-nb/strings.xml \
