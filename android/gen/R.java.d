@@ -26,9 +26,4 @@
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/res/values-et/strings.xml \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/res/values-pt-rBR/strings.xml \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/res/values-es/strings.xml \
-/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/res/drawable-mdpi/icon.png \
-/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/res/drawable-hdpi/icon.png \
-/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/res/drawable-ldpi/icon.png \
-/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/res/drawable/logo.png \
-/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/res/drawable/icon.png \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/AndroidManifest.xml \
