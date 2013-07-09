@@ -2,7 +2,7 @@ import QtQuick 1.1
 Rectangle {
 
     id: root
-    color: "#141414"
+    color: "#222222"
     height: 800
     width: 480
 
@@ -41,7 +41,7 @@ Rectangle {
     /** TOP STATUS BAR **/
     Rectangle {
         id: statusBar
-        height: 75
+        height: parent.height/10
         color: "#00000000"
         anchors { top: parent.top; left: parent.left; right: parent.right }
         border.color: "#2b2b2b"
@@ -58,14 +58,14 @@ Rectangle {
         IconWidget {
             id: editButton
             anchors { top: parent.top; bottom: parent.bottom; left: parent.left }
-            source: "images/edit.png"
+            source: "edit"
             toggle: true
         }
 
         IconWidget {
             id: directionButton
             anchors { top: parent.top; bottom: parent.bottom; left: editButton.right; leftMargin: 5 }
-            source: reverseCountDirection ? "images/down.png" : "images/up.png"
+            source: reverseCountDirection ? "down" : "up"
             onClicked: reverseCountDirection ? reverseCountDirection = false : reverseCountDirection = true
 
             property bool reverseCountDirection: false
@@ -74,7 +74,7 @@ Rectangle {
         IconWidget {
             id: addCounter
             anchors { top: parent.top; bottom: parent.bottom; right: parent.right }
-            source: "images/add.png"
+            source: "new"
             disabled: trackerRepeater.count === 4 ? true : false
             onClicked: {
                 if (counts < 4)
@@ -87,7 +87,7 @@ Rectangle {
         IconWidget {
             id: subtractCounter
             anchors { top: parent.top; bottom: parent.bottom; right: addCounter.left }
-            source: "images/delete.png"
+            source: "delete"
             disabled: trackerRepeater.count === 1 ? true : false
             onClicked: {
                 if (addCounter.counts > 1)
@@ -153,14 +153,14 @@ Rectangle {
     Rectangle {
         id: toolbar
         anchors { bottom: parent.bottom; left: parent.left; right: parent.right }
-        height: 75
+        height: parent.height/10
         color: "#00000000"
         border { color: "#2b2b2b"; width: 1 }
 
         IconWidget {
             id: clockControl
             anchors { bottom: parent.bottom; top: parent.top; topMargin: 1; right: clockOutput.left; rightMargin: 20 }
-            source: "images/start.png"
+            source: "start"
             onClicked: startStop();
 
             function startStop()
@@ -168,12 +168,12 @@ Rectangle {
                 if (clock.running === true)
                 {
                     clock.stop();
-                    clockControl.source = "images/start.png";
+                    clockControl.source = "start";
                 }
                 else
                 {
                     clock.start();
-                    clockControl.source = "images/stop.png";
+                    clockControl.source = "stop";
                 }
             }
         }
@@ -181,7 +181,7 @@ Rectangle {
         IconWidget {
             id: reset
             anchors { bottom: parent.bottom; top: parent.top; topMargin: 1; left: parent.left }
-            source: "images/clear.png"
+            source: "clear"
             onClicked: resetAll()
 
             function resetAll()
@@ -189,7 +189,7 @@ Rectangle {
                 //Reset Clock
                 clock.restart();
                 clock.stop();
-                clockControl.source = "images/start.png";
+                clockControl.source = "start";
                 clockOutput.seconds = 0;
                 clockOutput.minutes = 0;
                 clockOutput.hours = 0;
@@ -209,7 +209,7 @@ Rectangle {
             id: menuButton
             anchors { top: parent.top; topMargin: 1; right: parent.right; bottom: parent.bottom }
             z: 1
-            source: "images/menu.png"
+            source: "menu"
             toggle: true
             onClicked: unitSelect.toggle()
         }
