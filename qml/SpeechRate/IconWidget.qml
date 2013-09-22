@@ -19,7 +19,7 @@ Rectangle {
 
     ]
 
-    property color pressedColor: "#29A3CC"
+    property color pressedColor: "#33B5E5"
     property string source
     property bool srcAbsolute: false
     property alias iconRotation: image.rotation
@@ -54,7 +54,7 @@ Rectangle {
         anchors.fill: parent
         Component.onCompleted: clicked.connect(parent.clicked);
         onClicked: {
-            if (parent.toggle)
+            if (parent.toggle && !parent.disabled)
             {
                 if (parent.toggled)
                     parent.toggled = false;
