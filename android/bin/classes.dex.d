@@ -23,3 +23,4 @@
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/kde/necessitas/origo/QtApplication.class \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/kde/necessitas/origo/QtActivity$4.class \
 /home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/classes/org/kde/necessitas/origo/QtActivity$1.class \
+/home/paul/Documents/Programming/Android/SpeechRate/SpeechRate/android/bin/dexedLibs/annotations-448bb3831b9a364f0a5f6d97c089c9a1.jar \

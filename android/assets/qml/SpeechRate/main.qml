@@ -30,8 +30,8 @@ Rectangle {
         {
             for (x=0; x < trackerRepeater.count; x++)
             {
-                count = trackerRepeater.itemAt(x).eventCount;
-                trackerRepeater.itemAt(x).frequency = (count/totTime);
+                count = trackerModel.get(x).num;
+                trackerModel.setProperty(x,"frequency",(count/totTime));
             }
         }
         else
@@ -78,7 +78,10 @@ Rectangle {
             disabled: trackerRepeater.count === 4 ? true : false
             onClicked: {
                 if (counts < 4)
+                {
+                    trackerModel.append({"name": "Events", "num": 0, "frequency": 0.0});
                     counts++;
+                }
             }
 
             property int counts: 1
@@ -91,11 +94,13 @@ Rectangle {
             disabled: trackerRepeater.count === 1 ? true : false
             onClicked: {
                 if (addCounter.counts > 1)
+                    trackerModel.remove(trackerModel.count-1);
                     addCounter.counts--;
             }
         }
     }
 
+    /** COUNTER GRID **/
     Grid {
         id: eventTracker
         x: 0
@@ -107,44 +112,61 @@ Rectangle {
         spacing: 10
         anchors { top: statusBar.bottom; topMargin: 5; bottom: toolbar.top; bottomMargin: 5; right: parent.right; left: parent.left }
 
+        ListModel {
+            id: trackerModel
+            ListElement {
+                name: "Events"
+                num: 0
+                frequency: 0
+            }
+        }
+
+        function changeCount (index,negative)
+        {
+            var currentCount = trackerModel.get(index).num
+            if (negative)
+                trackerModel.setProperty(index,"num",currentCount-1);
+            else
+                trackerModel.setProperty(index,"num",currentCount+1);
+
+        }
+
+        function changeName (index,nName)
+        {
+            trackerModel.setProperty(index,"name",nName);
+        }
+
         Repeater {
             id: trackerRepeater
-            model: addCounter.counts
+            model: trackerModel
 
             Item {
                 width: (root.width/2)-5
                 height: (eventTracker.height/2)-5
 
-                property alias eventCount: counterDelegate.eventCount
-                property alias frequency: counterDelegate.frequency
                 property alias text: textDelegate.text
+
+                signal countChange (int counterIndex, bool negative)
+
+                onCountChange: eventTracker.changeCount(counterIndex,negative)
 
                 Button {
                     id: counterDelegate
                     anchors.fill: parent
                     visible: !editButton.toggled
-                    text: textDelegate.text+": "+eventCount+"\n"+frequency.toFixed(3)+"\n"+textDelegate.text+"/"+unitSelect.timeUnit
+                    text: name+": "+num+"\n"+frequency.toFixed(3)+"\n"+name+"/"+unitSelect.timeUnit
                     font.pointSize: 24
-                    onClicked: directionButton.reverseCountDirection ? eventCount-- : eventCount++
-
-                    Component.onCompleted: resetCount.connect(reset.clicked)
-
-                    property int eventCount: 0
-                    property double frequency: 0.0
-                    signal resetCount
-
-                    onResetCount: {
-                        frequency = 0.0
-                        eventCount = 0
-                    }
+                    onClicked: parent.countChange(index,directionButton.reverseCountDirection)
                 }
                 TextInput {
                     id: textDelegate
                     visible: editButton.toggled
-                    text: "Events"
+                    text: name
                     font.pointSize: 36
                     color: "#ffffff"
                     anchors.centerIn: counterDelegate
+
+                    onTextChanged: eventTracker.changeName(index,text);
                 }
             }
         }
@@ -196,10 +218,9 @@ Rectangle {
                 clockOutput.text = "00:00:00";
 
                 //Reset Counters
-                for (var x=0; x<trackerRepeater.count; x++)
+                for (var x=0; x<trackerModel.count; x++)
                 {
-                    trackerRepeater.itemAt(x).eventCount = 0;
-                    trackerRepeater.itemAt(x).frequency = 0.0;
+                    trackerModel.setProperty(x,"num",0);
                 }
             }
         }
@@ -212,6 +233,8 @@ Rectangle {
             source: "menu"
             toggle: true
             onClicked: unitSelect.toggle()
+
+            Keys.onMenuPressed: unitSelect.toggle()
         }
 
         Text {
@@ -271,6 +294,9 @@ Rectangle {
                     hrPrefix = "";
 
                 clockOutput.text = hrPrefix+clockOutput.hours+":"+minPrefix+clockOutput.minutes+":"+secPrefix+clockOutput.seconds;
+
+                root.getFrequency();
+
             }
         }
     }

@@ -1,6 +1,6 @@
-# view AndroidManifest.xml #generated:4
+# view AndroidManifest.xml #generated:5
 -keep class org.kde.necessitas.origo.QtActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:3
+# view AndroidManifest.xml #generated:4
 -keep class org.kde.necessitas.origo.QtApplication { <init>(...); }
 
