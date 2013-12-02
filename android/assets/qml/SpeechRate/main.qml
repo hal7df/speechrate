@@ -223,6 +223,7 @@ Rectangle {
                 for (var x=0; x<trackerModel.count; x++)
                 {
                     trackerModel.setProperty(x,"num",0);
+                    trackerModel.setProperty(x,"frequency",0.0);
                 }
             }
         }
