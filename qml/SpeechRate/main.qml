@@ -6,6 +6,8 @@ Rectangle {
     height: 800
     width: 480
 
+    Keys.onMenuPressed: unitSelect.toggle()
+
     /** EVENT FREQUENCY **/
     function getFrequency()
     {
@@ -221,6 +223,7 @@ Rectangle {
                 for (var x=0; x<trackerModel.count; x++)
                 {
                     trackerModel.setProperty(x,"num",0);
+                    trackerModel.setProperty(x,"frequency",0.0);
                 }
             }
         }
@@ -233,8 +236,6 @@ Rectangle {
             source: "menu"
             toggle: true
             onClicked: unitSelect.toggle()
-
-            Keys.onMenuPressed: unitSelect.toggle()
         }
 
         Text {

@@ -6,6 +6,8 @@ Rectangle {
     height: 800
     width: 480
 
+    Keys.onMenuPressed: unitSelect.toggle()
+
     /** EVENT FREQUENCY **/
     function getFrequency()
     {
@@ -233,8 +235,6 @@ Rectangle {
             source: "menu"
             toggle: true
             onClicked: unitSelect.toggle()
-
-            Keys.onMenuPressed: unitSelect.toggle()
         }
 
         Text {
